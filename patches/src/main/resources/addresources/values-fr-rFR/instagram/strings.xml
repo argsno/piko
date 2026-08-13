@@ -68,6 +68,8 @@
     <string name="piko_amoled_title">AMOLED</string>
     <string name="piko_disable_analytics">Désactiver les analyses</string>
     <string name="piko_delete_analytics_cache">Supprimer le cache des analyses</string>
+    <string name="piko_disable_analytics_desc">Bloque les analyses envoyées aux serveurs d’Instagram/Facebook.
+Effet secondaire : une fenêtre contextuelle demandant l’autorisation d’accéder à la localisation et aux contacts réapparaît continuellement, même après avoir autorisé ou ignoré la demande. Pour éviter cela, activez cette fonctionnalité uniquement après avoir autorisé ou ignoré cette demande.</string>
     <string name="piko_disable_discover_people">Désactiver “Découvrir des personnes”</string>
     <string name="piko_disable_discover_people_desc">Désactive la section “Découvrir des personnes” sur le profil utilisateur</string>
     <string name="piko_follow_back_indicator">Activer l\'indicateur de statut d\'amitié</string>
