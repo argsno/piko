@@ -49,6 +49,11 @@ internal object TweetInfoFingerprint : Fingerprint(
     name = "getTweetInfo",
 )
 
+internal object TweetTimelineInfoFingerprint : Fingerprint(
+    definingClass = ENTITY_TWEET_DEFINING_CLASS,
+    name = "getTimelineTweetInfo",
+)
+
 internal object TweetLongTextFingerprint : Fingerprint(
     definingClass = ENTITY_TWEET_DEFINING_CLASS,
     name = "getLongText",

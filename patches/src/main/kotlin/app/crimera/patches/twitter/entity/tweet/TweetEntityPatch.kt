@@ -98,5 +98,9 @@ val tweetEntityPatch =
                     TweetInfoFingerprint.changeFirstString(infoField)
                 }
             }
+
+            // JsonTimelineTweet.r() unwraps i0$a to core/b. Its timeline tweet
+            // info is core/b.f, unlike the legacy core/e.a mapping above.
+            TweetTimelineInfoFingerprint.changeFirstString("f")
         }
     }

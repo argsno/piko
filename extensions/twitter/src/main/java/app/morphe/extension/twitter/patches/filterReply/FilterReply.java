@@ -8,6 +8,7 @@ package app.morphe.extension.twitter.patches.filterReply;
 
 import app.morphe.extension.crimera.PikoUtils;
 import app.morphe.extension.twitter.Pref;
+import app.morphe.extension.twitter.entity.Tweet;
 
 import java.util.Locale;
 
@@ -15,10 +16,9 @@ import java.util.Locale;
  * Runtime filter that hides Twitter replies whose text contains any of the
  * user's configured keywords.
  *
- * The bytecode hook extracts the reply-to status id and visible text from the
- * parsed timeline model before its rendered timeline item is constructed. This
- * class only owns the preference gate and keyword decision, keeping obfuscated
- * Twitter model details out of the runtime extension.
+ * The bytecode hook supplies the parsed core tweet model before its rendered
+ * timeline item is constructed. This class is the single drop/keep seam and
+ * keeps Twitter model access behind the Tweet entity.
  */
 @SuppressWarnings("unused")
 public class FilterReply {
@@ -26,20 +26,23 @@ public class FilterReply {
     /**
      * Decide whether a parsed tweet should be dropped from the timeline.
      *
-     * @param inReplyToStatusId zero for an original tweet, otherwise the id of
-     *                          the tweet being replied to
-     * @param text note-tweet text when present, otherwise the regular tweet text
-     * @return {@code true} when the timeline item should be hidden
+     * @param itemObject parsed core tweet model
+     * @return {@code null} to hide the item, otherwise {@code itemObject}
      */
-    public static boolean shouldFilter(long inReplyToStatusId, CharSequence text) {
+    public static Object filter(Object itemObject) {
         try {
-            return Pref.filterReplyByKeyword()
-                    && inReplyToStatusId != 0L
-                    && matchesAnyKeyword(text == null ? null : text.toString(), Pref.filterReplyKeywords());
+            if (!Pref.filterReplyByKeyword()) {
+                return itemObject;
+            }
+
+            Tweet tweet = new Tweet(itemObject);
+            if (tweet.isReply() && matchesAnyKeyword(tweet.getTimelineText(), Pref.filterReplyKeywords())) {
+                return null;
+            }
         } catch (Exception e) {
             PikoUtils.logger(e);
-            return false;
         }
+        return itemObject;
     }
 
     /**

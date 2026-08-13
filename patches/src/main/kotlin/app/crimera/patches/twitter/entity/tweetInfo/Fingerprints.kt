@@ -26,3 +26,13 @@ internal object TweetLangFingerprint : Fingerprint(
     definingClass = ENTITY_TWEET_INFO_DEFINING_CLASS,
     name = "getLang",
 )
+
+internal object TweetReplyToStatusIdFingerprint : Fingerprint(
+    definingClass = ENTITY_TWEET_INFO_DEFINING_CLASS,
+    name = "getInReplyToStatusId",
+)
+
+internal object TweetInfoTimelineTextFingerprint : Fingerprint(
+    definingClass = ENTITY_TWEET_INFO_DEFINING_CLASS,
+    name = "getTimelineText",
+)
