@@ -94,6 +94,9 @@ public class Settings {
     public static final BooleanSetting TIMELINE_HIDE_POST_INLINE_METRICS = new BooleanSetting("timeline_hide_post_inline_metrics", false);
     public static final BooleanSetting TIMELINE_HIDE_POST_DETAILED_METRICS = new BooleanSetting("timeline_hide_post_detailed_metrics", false);
 
+    public static final BooleanSetting TIMELINE_FILTER_REPLY_BY_KEYWORD = new BooleanSetting("timeline_filter_reply_by_keyword", false);
+    public static final StringSetting TIMELINE_FILTER_REPLY_KEYWORDS = new StringSetting("timeline_filter_reply_keywords", "");
+
     public static final BooleanSetting PREMIUM_UNDO_POSTS = new BooleanSetting("premium_undo_posts", false);
     public static final BooleanSetting PREMIUM_NAVBAR = new BooleanSetting("premium_custom_navbar", true);
     public static final BooleanSetting PREMIUM_ENABLE_FORCE_PIP = new BooleanSetting("premium_enable_force_pip", false);

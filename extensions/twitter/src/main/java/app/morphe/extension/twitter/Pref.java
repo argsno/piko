@@ -72,6 +72,14 @@ public class Pref {
         return Utils.getBooleanPref(Settings.TIMELINE_SHOW_SENSITIVE_MEDIA);
     }
 
+    public static boolean filterReplyByKeyword() {
+        return Utils.getBooleanPref(Settings.TIMELINE_FILTER_REPLY_BY_KEYWORD);
+    }
+
+    public static String filterReplyKeywords() {
+        return Utils.getStringPref(Settings.TIMELINE_FILTER_REPLY_KEYWORDS);
+    }
+
     public static boolean hideTodaysNews() {
         return Utils.getBooleanPref(Settings.ADS_REMOVE_TODAYS_NEW);
     }
