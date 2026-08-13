@@ -72,9 +72,9 @@ To patch with Twitter/X version 11.88 and above, you must include patches from a
 ## ⚙️ Patch Details
 
 <!-- PATCHES_START -->
-> **[v3.8.0](https://github.com/crimera/piko/releases/tag/v3.8.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;128 patches total
+> **[v3.9.0](https://github.com/argsno/piko/releases/tag/v3.9.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;129 patches total
 <details>
-<summary>📦 X&nbsp;&nbsp;•&nbsp;&nbsp;74 patches</summary>
+<summary>📦 X&nbsp;&nbsp;•&nbsp;&nbsp;75 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -118,6 +118,7 @@ To patch with Twitter/X version 11.88 and above, you must include patches from a
 | [Enable debug menu for posts](#enable-debug-menu-for-posts) |  |  |
 | [Enable force HD videos](#enable-force-hd-videos) | Videos will be played in highest quality always |  |
 | [Export all activities](#export-all-activities) | Makes all app activities exportable. |  |
+| [Filter replies by keyword](#filter-replies-by-keyword) | Hide replies whose text contains any of the user's configured keywords. |  |
 | [Force enable translate](#force-enable-translate) | Get translate option for all posts |  |
 | [Handle custom twitter links](#handle-custom-twitter-links) | Adds support for opening custom twitter links such as vxtwitter, fxtwitter, and fixupx within the app. These will have to be manually enabled under the "Open by default" section in the app info! | • Custom sharing domains<br>• Include unofficial vxtwitter/fxtwitter instance links |
 | [Hide Banner](#hide-banner) | Hide new post banner |  |

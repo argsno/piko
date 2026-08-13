@@ -1,3 +1,12 @@
+## [3.9.0](https://github.com/argsno/piko/compare/v3.8.0...v3.9.0) (2026-08-13)
+
+### ✨ New Features
+
+* **twitter:** add isReply() predicate to Tweet entity ([9e88a16](https://github.com/argsno/piko/commit/9e88a16fca49e448977a948783abb2e9a7d818e2))
+* **twitter:** add settings contract for reply-keyword filter ([aadd71a](https://github.com/argsno/piko/commit/aadd71a75ce5e8de4ee82677860f2b603180b7b5))
+* **twitter:** add settings UI + i18n for reply-keyword filter ([1d77106](https://github.com/argsno/piko/commit/1d771067efade5211bc8533e6d070531b049971d))
+* **twitter:** implement reply-keyword filter engine + hook (ticket 04) ([e7d98cf](https://github.com/argsno/piko/commit/e7d98cf089a472b436f8af859d00030f94a37821))
+
 ## [3.8.0](https://github.com/crimera/piko/compare/v3.7.0...v3.8.0) (2026-07-24)
 
 ### 🐛 Bug Fixes
