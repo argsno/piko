@@ -8,7 +8,7 @@ package app.crimera.patches.twitter.timeline.filterReplyByKeyword
 
 import app.crimera.patches.twitter.misc.settings.settingsPatch
 import app.crimera.patches.twitter.utils.Constants.COMPATIBILITY_X
-import app.crimera.patches.twitter.utils.Constants.INTEGRATIONS_PACKAGE
+import app.crimera.patches.twitter.utils.Constants.PATCHES_DESCRIPTOR
 import app.crimera.patches.twitter.utils.enableSettings
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
@@ -18,7 +18,7 @@ import app.morphe.patcher.patch.bytecodePatch
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
-private const val FILTER_REPLY_CLASS_DESCRIPTOR = "$INTEGRATIONS_PACKAGE/patches/filterReply/FilterReply"
+private const val FILTER_REPLY_CLASS_DESCRIPTOR = "$PATCHES_DESCRIPTOR/filterReply/FilterReply"
 
 /**
  * Same fingerprint family as the hide-hidden-replies patch: the
