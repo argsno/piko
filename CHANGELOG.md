@@ -1,3 +1,9 @@
+## [3.9.2](https://github.com/argsno/piko/compare/v3.9.1...v3.9.2) (2026-08-13)
+
+### 🐛 Bug Fixes
+
+* **twitter:** avoid invalid high register in reply filter ([29de402](https://github.com/argsno/piko/commit/29de402f6b6f1e01475feb0c123d663f87cc759f))
+
 ## [3.9.1](https://github.com/argsno/piko/compare/v3.9.0...v3.9.1) (2026-08-13)
 
 ### 🐛 Bug Fixes

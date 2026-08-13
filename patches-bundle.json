@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-08-13T13:42:29",
-  "description": "## [3.9.1](https://github.com/argsno/piko/compare/v3.9.0...v3.9.1) (2026-08-13)\n\n### 🐛 Bug Fixes\n\n* **twitter:** apply reply keyword filter to parsed tweets ([fa96f57](https://github.com/argsno/piko/commit/fa96f5714985a7515b18c05a31acd53e7a33e228))",
-  "download_url": "https://github.com/argsno/piko/releases/download/v3.9.1/patches-3.9.1.mpp",
-  "signature_download_url": "https://github.com/argsno/piko/releases/download/v3.9.1/patches-3.9.1.mpp.asc",
-  "version": "3.9.1"
+  "created_at": "2026-08-13T14:02:43",
+  "description": "## [3.9.2](https://github.com/argsno/piko/compare/v3.9.1...v3.9.2) (2026-08-13)\n\n### 🐛 Bug Fixes\n\n* **twitter:** avoid invalid high register in reply filter ([29de402](https://github.com/argsno/piko/commit/29de402f6b6f1e01475feb0c123d663f87cc759f))",
+  "download_url": "https://github.com/argsno/piko/releases/download/v3.9.2/patches-3.9.2.mpp",
+  "signature_download_url": "https://github.com/argsno/piko/releases/download/v3.9.2/patches-3.9.2.mpp.asc",
+  "version": "3.9.2"
 }
