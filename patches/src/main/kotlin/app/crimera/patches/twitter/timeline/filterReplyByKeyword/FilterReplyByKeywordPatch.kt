@@ -49,52 +49,53 @@ val filterReplyByKeywordPatch =
         execute {
             val method = FilterReplyByKeywordFingerprint.method
 
-            // JsonTimelineTweet.r() returns a rendered timeline model (r4), not
-            // the core Tweet entity. Resolve its polymorphic tweet-result
-            // builder to core/b, then inspect core/b.f (core/d) before r4 is
-            // constructed. Registers v0-v3 are safe here because the original
-            // first instruction initializes v0 from p0.
+            // JsonTimelineTweet.r() has 39 registers in the supported build, so
+            // p0 is v38 and cannot be encoded directly by iget-object (format
+            // 22c only has four bits per register). Let the original
+            // move-object/from16 v0, p0 run first, keep v0 as the receiver for
+            // the original body, and use v1-v4 as scratch registers. The
+            // original body initializes those registers before reading them.
             method.addInstructionsWithLabels(
-                0,
+                1,
                 """
-                iget-object v0, p0, $JSON_TIMELINE_TWEET_DESCRIPTOR->a:$TWEET_RESULT_BUILDER_DESCRIPTOR
-                invoke-static {v0}, $TWEET_RESULT_DESCRIPTOR->c($TWEET_RESULT_BUILDER_DESCRIPTOR)$CORE_TWEET_DESCRIPTOR
-                move-result-object v0
-                if-eqz v0, :piko_filter_reply_continue
+                iget-object v1, v0, $JSON_TIMELINE_TWEET_DESCRIPTOR->a:$TWEET_RESULT_BUILDER_DESCRIPTOR
+                invoke-static {v1}, $TWEET_RESULT_DESCRIPTOR->c($TWEET_RESULT_BUILDER_DESCRIPTOR)$CORE_TWEET_DESCRIPTOR
+                move-result-object v1
+                if-eqz v1, :piko_filter_reply_continue
 
-                iget-object v0, v0, $CORE_TWEET_DESCRIPTOR->f:$CORE_TWEET_INFO_DESCRIPTOR
-                if-eqz v0, :piko_filter_reply_continue
-                iget-wide v1, v0, $CORE_TWEET_INFO_DESCRIPTOR->o:J
+                iget-object v1, v1, $CORE_TWEET_DESCRIPTOR->f:$CORE_TWEET_INFO_DESCRIPTOR
+                if-eqz v1, :piko_filter_reply_continue
+                iget-wide v2, v1, $CORE_TWEET_INFO_DESCRIPTOR->o:J
 
-                iget-object v3, v0, $CORE_TWEET_INFO_DESCRIPTOR->t0:$NOTE_TWEET_CONTAINER_DESCRIPTOR
-                if-eqz v3, :piko_filter_reply_short_text
-                iget-object v3, v3, $NOTE_TWEET_CONTAINER_DESCRIPTOR->c:Lkotlin/o;
-                if-eqz v3, :piko_filter_reply_short_text
-                invoke-virtual {v3}, Lkotlin/o;->getValue()Ljava/lang/Object;
-                move-result-object v3
-                if-eqz v3, :piko_filter_reply_short_text
-                check-cast v3, $NOTE_TWEET_DESCRIPTOR
-                iget-object v3, v3, $NOTE_TWEET_DESCRIPTOR->b:Ljava/lang/String;
-                if-nez v3, :piko_filter_reply_check
+                iget-object v4, v1, $CORE_TWEET_INFO_DESCRIPTOR->t0:$NOTE_TWEET_CONTAINER_DESCRIPTOR
+                if-eqz v4, :piko_filter_reply_short_text
+                iget-object v4, v4, $NOTE_TWEET_CONTAINER_DESCRIPTOR->c:Lkotlin/o;
+                if-eqz v4, :piko_filter_reply_short_text
+                invoke-virtual {v4}, Lkotlin/o;->getValue()Ljava/lang/Object;
+                move-result-object v4
+                if-eqz v4, :piko_filter_reply_short_text
+                check-cast v4, $NOTE_TWEET_DESCRIPTOR
+                iget-object v4, v4, $NOTE_TWEET_DESCRIPTOR->b:Ljava/lang/String;
+                if-nez v4, :piko_filter_reply_check
 
                 :piko_filter_reply_short_text
-                iget-object v3, v0, $CORE_TWEET_INFO_DESCRIPTOR->l:$TWEET_TEXT_DESCRIPTOR
-                if-nez v3, :piko_filter_reply_get_text
-                iget-object v3, v0, $CORE_TWEET_INFO_DESCRIPTOR->k:$TWEET_TEXT_DESCRIPTOR
+                iget-object v4, v1, $CORE_TWEET_INFO_DESCRIPTOR->l:$TWEET_TEXT_DESCRIPTOR
+                if-nez v4, :piko_filter_reply_get_text
+                iget-object v4, v1, $CORE_TWEET_INFO_DESCRIPTOR->k:$TWEET_TEXT_DESCRIPTOR
 
                 :piko_filter_reply_get_text
-                if-eqz v3, :piko_filter_reply_continue
-                invoke-virtual {v3}, $TWEET_TEXT_DESCRIPTOR->getText()Ljava/lang/CharSequence;
-                move-result-object v3
+                if-eqz v4, :piko_filter_reply_continue
+                invoke-virtual {v4}, $TWEET_TEXT_DESCRIPTOR->getText()Ljava/lang/CharSequence;
+                move-result-object v4
 
                 :piko_filter_reply_check
-                invoke-static {v1, v2, v3}, $FILTER_REPLY_CLASS_DESCRIPTOR;->shouldFilter(JLjava/lang/CharSequence;)Z
-                move-result v0
-                if-eqz v0, :piko_filter_reply_continue
-                const/4 v0, 0x0
-                return-object v0
+                invoke-static {v2, v3, v4}, $FILTER_REPLY_CLASS_DESCRIPTOR;->shouldFilter(JLjava/lang/CharSequence;)Z
+                move-result v1
+                if-eqz v1, :piko_filter_reply_continue
+                const/4 v1, 0x0
+                return-object v1
                 """.trimIndent(),
-                ExternalLabel("piko_filter_reply_continue", method.getInstruction(0)),
+                ExternalLabel("piko_filter_reply_continue", method.getInstruction(1)),
             )
 
             enableSettings("filterReplyByKeyword")
