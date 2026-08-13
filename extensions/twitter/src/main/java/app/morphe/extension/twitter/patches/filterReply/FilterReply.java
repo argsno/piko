@@ -8,16 +8,17 @@ package app.morphe.extension.twitter.patches.filterReply;
 
 import app.morphe.extension.crimera.PikoUtils;
 import app.morphe.extension.twitter.Pref;
-import app.morphe.extension.twitter.entity.Tweet;
+
+import java.util.Locale;
 
 /**
  * Runtime filter that hides Twitter replies whose text contains any of the
  * user's configured keywords.
  *
- * Mirrors the Instagram {@code FilterStory} shape: a single static
- * {@link #filter(Object)} seam that returns {@code null} to drop an item, or
- * the (unchanged) item to keep it. The decision is kept free of Android /
- * reflection concerns so it stays easy to reason about and test.
+ * The bytecode hook extracts the reply-to status id and visible text from the
+ * parsed timeline model before its rendered timeline item is constructed. This
+ * class only owns the preference gate and keyword decision, keeping obfuscated
+ * Twitter model details out of the runtime extension.
  */
 @SuppressWarnings("unused")
 public class FilterReply {
@@ -25,36 +26,20 @@ public class FilterReply {
     /**
      * Decide whether a parsed tweet should be dropped from the timeline.
      *
-     * @param itemObject the core tweet model (as produced by the
-     *                   {@code JsonTimelineTweet} parse hook)
-     * @return {@code null} to hide the item, or {@code itemObject} unchanged to
-     *         keep it visible
+     * @param inReplyToStatusId zero for an original tweet, otherwise the id of
+     *                          the tweet being replied to
+     * @param text note-tweet text when present, otherwise the regular tweet text
+     * @return {@code true} when the timeline item should be hidden
      */
-    public static Object filter(Object itemObject) {
+    public static boolean shouldFilter(long inReplyToStatusId, CharSequence text) {
         try {
-            // Read the master switch on every call so edits apply without an
-            // app restart. When off, nothing is ever hidden.
-            if (!Pref.filterReplyByKeyword()) {
-                return itemObject;
-            }
-
-            Tweet tweet = new Tweet(itemObject);
-
-            // Only replies are filtered; an original tweet is never hidden.
-            if (!tweet.isReply()) {
-                return itemObject;
-            }
-
-            String text = tweet.getText();
-            if (matchesAnyKeyword(text, Pref.filterReplyKeywords())) {
-                return null;
-            }
+            return Pref.filterReplyByKeyword()
+                    && inReplyToStatusId != 0L
+                    && matchesAnyKeyword(text == null ? null : text.toString(), Pref.filterReplyKeywords());
         } catch (Exception e) {
-            // Tolerate reflection / field mismatches: keep the reply rather than
-            // crash the parse path.
             PikoUtils.logger(e);
+            return false;
         }
-        return itemObject;
     }
 
     /**
@@ -68,10 +53,10 @@ public class FilterReply {
         if (text == null || text.isEmpty() || keywords == null || keywords.isEmpty()) {
             return false;
         }
-        String lowerText = text.toLowerCase();
+        String lowerText = text.toLowerCase(Locale.ROOT);
         for (String raw : keywords.split("\n", -1)) {
             String keyword = raw.trim();
-            if (!keyword.isEmpty() && lowerText.contains(keyword.toLowerCase())) {
+            if (!keyword.isEmpty() && lowerText.contains(keyword.toLowerCase(Locale.ROOT))) {
                 return true;
             }
         }
