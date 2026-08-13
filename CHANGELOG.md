@@ -1,3 +1,9 @@
+## [3.9.1](https://github.com/argsno/piko/compare/v3.9.0...v3.9.1) (2026-08-13)
+
+### 🐛 Bug Fixes
+
+* **twitter:** apply reply keyword filter to parsed tweets ([fa96f57](https://github.com/argsno/piko/commit/fa96f5714985a7515b18c05a31acd53e7a33e228))
+
 ## [3.9.0](https://github.com/argsno/piko/compare/v3.8.0...v3.9.0) (2026-08-13)
 
 ### ✨ New Features

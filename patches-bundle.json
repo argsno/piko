@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-08-13T10:52:18",
-  "description": "## [3.9.0](https://github.com/argsno/piko/compare/v3.8.0...v3.9.0) (2026-08-13)\n\n### ✨ New Features\n\n* **twitter:** add isReply() predicate to Tweet entity ([9e88a16](https://github.com/argsno/piko/commit/9e88a16fca49e448977a948783abb2e9a7d818e2))\n* **twitter:** add settings contract for reply-keyword filter ([aadd71a](https://github.com/argsno/piko/commit/aadd71a75ce5e8de4ee82677860f2b603180b7b5))\n* **twitter:** add settings UI + i18n for reply-keyword filter ([1d77106](https://github.com/argsno/piko/commit/1d771067efade5211bc8533e6d070531b049971d))\n* **twitter:** implement reply-keyword filter engine + hook (ticket 04) ([e7d98cf](https://github.com/argsno/piko/commit/e7d98cf089a472b436f8af859d00030f94a37821))",
-  "download_url": "https://github.com/argsno/piko/releases/download/v3.9.0/patches-3.9.0.mpp",
-  "signature_download_url": "https://github.com/argsno/piko/releases/download/v3.9.0/patches-3.9.0.mpp.asc",
-  "version": "3.9.0"
+  "created_at": "2026-08-13T13:42:29",
+  "description": "## [3.9.1](https://github.com/argsno/piko/compare/v3.9.0...v3.9.1) (2026-08-13)\n\n### 🐛 Bug Fixes\n\n* **twitter:** apply reply keyword filter to parsed tweets ([fa96f57](https://github.com/argsno/piko/commit/fa96f5714985a7515b18c05a31acd53e7a33e228))",
+  "download_url": "https://github.com/argsno/piko/releases/download/v3.9.1/patches-3.9.1.mpp",
+  "signature_download_url": "https://github.com/argsno/piko/releases/download/v3.9.1/patches-3.9.1.mpp.asc",
+  "version": "3.9.1"
 }
