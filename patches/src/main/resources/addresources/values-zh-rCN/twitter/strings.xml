@@ -156,6 +156,10 @@
     <string name="piko_pref_hide_post_inline_metrics_desc">隐藏帖子点赞、转帖等次数</string>
     <string name="piko_pref_hide_post_detailed_metrics">隐藏帖子详情页互动量</string>
     <string name="piko_pref_hide_post_detailed_metrics_desc">在帖子详情页中隐藏点赞、转帖等次数</string>
+    <string name="piko_pref_filter_reply_by_keyword">按关键词过滤回复</string>
+    <string name="piko_pref_filter_reply_by_keyword_desc">隐藏包含任意关键词的回复</string>
+    <string name="piko_pref_filter_reply_keywords">回复过滤关键词</string>
+    <string name="piko_pref_filter_reply_keywords_desc">每行一个关键词，匹配不区分大小写的子串</string>
     <!-- Customization Settings -->
     <string name="piko_title_customisation">自定义</string>
     <string name="piko_pref_customisation_profiletabs">隐藏个人资料标签</string>

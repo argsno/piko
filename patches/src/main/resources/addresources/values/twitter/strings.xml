@@ -197,6 +197,10 @@
     <string name="piko_pref_hide_post_inline_metrics_desc">Hides like, reposts etc counts on inline view</string>
     <string name="piko_pref_hide_post_detailed_metrics">Hide post detailed view metrics</string>
     <string name="piko_pref_hide_post_detailed_metrics_desc">Hides like, reposts etc counts on detailed view</string>
+    <string name="piko_pref_filter_reply_by_keyword">Filter replies by keyword</string>
+    <string name="piko_pref_filter_reply_by_keyword_desc">Hide replies that contain any of your keywords</string>
+    <string name="piko_pref_filter_reply_keywords">Reply filter keywords</string>
+    <string name="piko_pref_filter_reply_keywords_desc">One keyword per line. Matching is a case-insensitive substring.</string>
 
     <!-- Customization Settings -->
     <string name="piko_title_customisation">Customization</string>

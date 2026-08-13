@@ -1122,6 +1122,24 @@ public class ScreenBuilder {
             );
         }
 
+        if (SettingsStatus.filterReplyByKeyword) {
+            addPreference(category,
+                    helper.switchPreference(
+                            str("piko_pref_filter_reply_by_keyword"),
+                            str("piko_pref_filter_reply_by_keyword_desc"),
+                            Settings.TIMELINE_FILTER_REPLY_BY_KEYWORD
+                    )
+            );
+
+            addPreference(category,
+                    helper.editTextMultilinePreference(
+                            str("piko_pref_filter_reply_keywords"),
+                            str("piko_pref_filter_reply_keywords_desc"),
+                            Settings.TIMELINE_FILTER_REPLY_KEYWORDS
+                    )
+            );
+        }
+
     }
 
     public void buildLoggingSection(boolean buildCategory) {
