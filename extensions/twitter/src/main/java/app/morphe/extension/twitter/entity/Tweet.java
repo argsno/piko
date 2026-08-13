@@ -46,6 +46,32 @@ public class Tweet extends Debug {
         return (Long) super.getMethod("userIdMethod");
     }
 
+    /**
+     * Whether the wrapped tweet is a reply (评论) rather than an original post.
+     *
+     * A reply points at the status it replies to via its reply-to status id;
+     * an original tweet has no such id. The field is nullable (Long) — a null
+     * value, or a primitive long default of 0, both mean "not a reply".
+     *
+     * The obfuscated field name below was chosen from the canonical Twitter core
+     * model field. Confirm it against the target APK at dev time using the
+     * built-in reflection-describe helper ({@code Debug.describeClass()}) and
+     * update the literal if the field is obfuscated differently.
+     */
+    public boolean isReply() {
+        try {
+            Object value = super.getField("inReplyToStatusId");
+            // null is not a reply; a numeric 0 (covers primitive long) is not a
+            // reply either. Any non-zero value means the tweet replies to another.
+            return value instanceof Number && ((Number) value).longValue() != 0L;
+        } catch (Exception e) {
+            // Missing or renamed field on this APK version — tolerate and report
+            // not-a-reply so original tweets are never hidden by later filters.
+            PikoUtils.logger(e);
+            return false;
+        }
+    }
+
     private ArrayList<ExtMediaEntities> getExtendedMediaEntities() throws Exception {
         ArrayList<ExtMediaEntities> extMediaEntitiesArrayList = new ArrayList();
 
