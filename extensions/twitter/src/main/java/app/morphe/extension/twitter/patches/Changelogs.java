@@ -28,7 +28,7 @@ import app.morphe.extension.shared.requests.Route;
 import app.morphe.extension.twitter.Pref;
 
 public class Changelogs {
-    private static final String CHANGELOG_PROVIDER = "https://api.github.com/repos/crimera/piko/releases/tags";
+    private static final String CHANGELOG_PROVIDER = "https://api.github.com/repos/argsno/piko/releases/tags";
     private static String patchVersion, latestChangelogVersion;
     static{
         latestChangelogVersion = Pref.getLatestChangelogVersion();
@@ -56,7 +56,14 @@ public class Changelogs {
         Route route = new Route(GET, "/v"+patchVersion);
         HttpURLConnection connection = Requester.getConnectionFromRoute(CHANGELOG_PROVIDER, route);
 
-        JSONObject responseJson = Requester.parseJSONObject(connection);
+        // A non-OK response (e.g. 404 when the release tag is not published) is
+        // expected for dev/CI builds, so return quietly instead of throwing.
+        if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+            connection.disconnect();
+            return null;
+        }
+
+        JSONObject responseJson = Requester.parseJSONObjectAndDisconnect(connection);
         String updateMessage = responseJson.getString("body");
         return convertMarkdownToHtml(updateMessage);
     }
