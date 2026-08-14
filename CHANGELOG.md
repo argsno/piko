@@ -1,3 +1,9 @@
+## [3.9.4](https://github.com/argsno/piko/compare/v3.9.3...v3.9.4) (2026-08-14)
+
+### 🐛 Bug Fixes
+
+* **twitter:** handle missing release tag in Changelogs and use argsno/piko provider ([f24f998](https://github.com/argsno/piko/commit/f24f998a37bf9ab3d60a7c5444acd6645587d42f))
+
 ## [3.9.3](https://github.com/argsno/piko/compare/v3.9.2...v3.9.3) (2026-08-13)
 
 ### 🐛 Bug Fixes

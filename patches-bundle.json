@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-08-13T14:48:53",
-  "description": "## [3.9.3](https://github.com/argsno/piko/compare/v3.9.2...v3.9.3) (2026-08-13)\n\n### 🐛 Bug Fixes\n\n* **twitter:** align reply filter with entity seam ([6d7671c](https://github.com/argsno/piko/commit/6d7671cb05c678b798718632388fd8a272e81e9f))",
-  "download_url": "https://github.com/argsno/piko/releases/download/v3.9.3/patches-3.9.3.mpp",
-  "signature_download_url": "https://github.com/argsno/piko/releases/download/v3.9.3/patches-3.9.3.mpp.asc",
-  "version": "3.9.3"
+  "created_at": "2026-08-14T01:20:36",
+  "description": "## [3.9.4](https://github.com/argsno/piko/compare/v3.9.3...v3.9.4) (2026-08-14)\n\n### 🐛 Bug Fixes\n\n* **twitter:** handle missing release tag in Changelogs and use argsno/piko provider ([f24f998](https://github.com/argsno/piko/commit/f24f998a37bf9ab3d60a7c5444acd6645587d42f))",
+  "download_url": "https://github.com/argsno/piko/releases/download/v3.9.4/patches-3.9.4.mpp",
+  "signature_download_url": "https://github.com/argsno/piko/releases/download/v3.9.4/patches-3.9.4.mpp.asc",
+  "version": "3.9.4"
 }
