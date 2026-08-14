@@ -30,20 +30,63 @@ public class FilterReply {
      * @return {@code null} to hide the item, otherwise {@code itemObject}
      */
     public static Object filter(Object itemObject) {
-        try {
-            if (!Pref.filterReplyByKeyword()) {
-                return itemObject;
-            }
+        boolean enabled = Pref.filterReplyByKeyword();
+        String keywords = Pref.filterReplyKeywords();
 
-            Tweet tweet = new Tweet(itemObject);
-            if (tweet.isReply() && matchesAnyKeyword(tweet.getTimelineText(), Pref.filterReplyKeywords())) {
-                return null;
+        boolean isReply = false;
+        long replyToStatusId = 0L;
+        int textLength = 0;
+        boolean matched = false;
+        String decision = "KEEP";
+
+        try {
+            if (enabled) {
+                Tweet tweet = new Tweet(itemObject);
+                isReply = tweet.isReply();
+                replyToStatusId = tweet.getInReplyToStatusId();
+                String text = tweet.getTimelineText();
+                textLength = text != null ? text.length() : 0;
+                matched = isReply && matchesAnyKeyword(text, keywords);
+                if (matched) {
+                    decision = "DROP";
+                }
             }
         } catch (Exception e) {
             PikoUtils.logger(e);
+            decision = "KEEP";
         }
-        return itemObject;
+
+        // ===== TEMP DEBUG [DEBUG-FRBK] — remove when done =====
+        logDebug(enabled, countKeywords(keywords), replyToStatusId, isReply, textLength, matched, decision);
+        // ======================================================
+
+        return decision.equals("DROP") ? null : itemObject;
     }
+
+    // ===== TEMP DEBUG [DEBUG-FRBK] — remove when done =====
+
+    private static int countKeywords(String keywords) {
+        int count = 0;
+        if (keywords != null && !keywords.isEmpty()) {
+            for (String raw : keywords.split("\n", -1)) {
+                if (!raw.trim().isEmpty()) count++;
+            }
+        }
+        return count;
+    }
+
+    private static void logDebug(boolean enabled, int keywordCount, long replyToStatusId,
+                                 boolean isReply, int textLength, boolean matched, String decision) {
+        PikoUtils.logger("[DEBUG-FRBK] entered=true enabled=" + enabled
+                + " keywordCount=" + keywordCount
+                + " replyToStatusId=" + replyToStatusId
+                + " isReply=" + isReply
+                + " textLength=" + textLength
+                + " matched=" + matched
+                + " decision=" + decision);
+    }
+
+    // ======================================================
 
     /**
      * Pure, dependency-free keyword match: case-insensitive substring

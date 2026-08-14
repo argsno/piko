@@ -51,6 +51,11 @@ public class Tweet extends Debug {
         return getTimelineTweetInfo().getInReplyToStatusId() != 0L;
     }
 
+    /** ID of the status this tweet replies to, or zero for a top-level tweet. */
+    public long getInReplyToStatusId() throws Exception {
+        return getTimelineTweetInfo().getInReplyToStatusId();
+    }
+
     /** Visible timeline text, preferring Note Tweet text when available. */
     public String getTimelineText() throws Exception {
         return getTimelineTweetInfo().getTimelineText();
